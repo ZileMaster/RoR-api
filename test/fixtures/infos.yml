@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  notice_board: one
+  head: MyString
+  description: MyString
+
+two:
+  notice_board: two
+  head: MyString
+  description: MyString
