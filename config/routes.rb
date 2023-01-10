@@ -6,7 +6,12 @@ Rails.application.routes.draw do
 
   namespace :api do 
     resources :admins do
-      resources :users
+      resources :users do
+        resources :komentars
+      end
+      resources :notice_boards do
+        resources :infos
+      end
     end
   end
   
