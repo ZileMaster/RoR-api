@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    post '/users/register', to: 'users#create'
+  end
+
   namespace :api do 
     resources :users do 
       resources :komentars
