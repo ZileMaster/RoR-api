@@ -4,21 +4,28 @@ class Api::ProjectPagesController < ApplicationController
         @projects_posts = Post.where(topic: "project")
         render json: @projects_posts
      end
+     
+     def show
+        @post = Post.where(id: params[:id], topic: "project")
+        render json: @post
+    end
 
      def create
         @post = Post.new(post_params)
-        if @post 
-            render json: { message: "Post has been successfully made!"}, status 200
+        if @post.save 
+            render json: { message: "Post has been successfully made!"}, status: 200
         else
-            render json: { error: "post not creates"}, status 400
+            render json: { error: "post not creates"}, status: 400
+        end
+    end
 
     def destroy
-        @post = Post.find(params[:id])
+        @post = Post.where(id: params[:id], topic: "project")
         if @post
             @post.destroy
-            render json: { message: 'post destroyed'}, status 200
+            render json: { message: 'post destroyed'}, status: 200
         else
-            render json: { error: 'post not destroyed'}, status 400;
+            render json: { error: 'post not destroyed'}, status: 400
         end
     end
 
@@ -35,7 +42,7 @@ class Api::ProjectPagesController < ApplicationController
     private 
 
     def post_params
-      params.require(:post).permit(:headline, :description)
+      params.require(:post).permit(:headline, :description, :project_page_id, :travel_blog_id, :personal_blog_id, :likes, :topic)
     end
 
 end

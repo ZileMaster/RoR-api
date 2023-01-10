@@ -9,9 +9,15 @@ Rails.application.routes.draw do
       resources :users
     end
   end
+  
+  namespace :api do
+    post '/register/users', to: 'users#create'
+    post '/login/users', to: 'users#show'
+  end
 
   namespace :api do
-    post '/users/register', to: 'users#create'
+    post '/register/admins', to: 'admins#create'
+    post '/login/admins', to: 'admins#show'
   end
 
   namespace :api do 
@@ -21,15 +27,15 @@ Rails.application.routes.draw do
   end
 
   namespace :api do 
-    resources :project_page, only: [:index, :create, :update, :destroy]
+    resources :project_pages
   end
 
   namespace :api do
-    resources :personal_blog, only: [:index, :create, :update, :destroy]
+    resources :personal_blogs
   end
 
   namespace :api do
-    resources :travel_blog, only: [:index, :create, :update, :destroy]
+    resources :travel_blogs
   end
 
 end

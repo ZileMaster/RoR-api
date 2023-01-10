@@ -7,8 +7,14 @@ class Api::UsersController < ApplicationController
 
     # get /user/:id
     def show 
-        @user = User.find(params[:id])
-        render json: @user
+        @user = User.find_by(username: user_params[:username])
+
+            if @user && @user.authenticate(user_params[:password])
+                token = encode_token({ user_id: @user.id})
+                render json: ({user: @user, token: token}), status: 200
+            else
+                render error: { error: 'unable to make user'}, status: 400
+            end
     end
 
     # POST /users
@@ -47,7 +53,7 @@ class Api::UsersController < ApplicationController
     private 
 
     def user_params
-        params.require(:user).permit(:username, :password )
+        params.require(:user).permit(:username, :password , :first_name, :last_name, :email, :admin_id)
     end
 
 end

@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_10_015922) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_10_145738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
     t.string "email"
     t.string "first_name"
     t.string "last_name"
@@ -68,9 +68,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_015922) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.bigint "personal_blog_id", null: false
-    t.bigint "travel_blog_id", null: false
-    t.bigint "project_page_id", null: false
+    t.bigint "personal_blog_id"
+    t.bigint "travel_blog_id"
+    t.bigint "project_page_id"
     t.string "headline"
     t.string "topic"
     t.string "description"
@@ -99,7 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_015922) do
   create_table "users", force: :cascade do |t|
     t.bigint "admin_id", null: false
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
     t.string "email"
     t.string "first_name"
     t.string "last_name"
@@ -109,7 +109,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_015922) do
   end
 
   add_foreign_key "infos", "notice_boards"
-  add_foreign_key "komentars", "posts"
   add_foreign_key "komentars", "users"
   add_foreign_key "newsletters", "users"
   add_foreign_key "notice_boards", "admins"
