@@ -28,6 +28,8 @@ gem "puma", "~> 5.0"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 gem 'pg'
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
