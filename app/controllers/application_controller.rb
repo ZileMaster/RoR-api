@@ -25,5 +25,10 @@ class ApplicationController < ActionController::API
             user_id = decoded_token[0]['user_id']
             @user = User.find_by(id: user_id)
         end
+    end
+
+    def authorize
+        render json: { message: 'You have to log in.' }, status: 400 unless
+        authorized_user
 end
 s
