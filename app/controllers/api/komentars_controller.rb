@@ -1,4 +1,6 @@
 class Api::KomentarsController < ApplicationController
+    before_action :authorize, only: [:create]
+    
     def index
         @komentars = Komentar.all
         render json: @komentars
@@ -19,7 +21,7 @@ class Api::KomentarsController < ApplicationController
     end
 
     def destroy
-        @komentar = Komentar.where(id: params[:id])
+        @komentar = Komentar.find(params[:id])
         if @komentar
             @komentar.destroy
             render json: { message: 'info destroyed'}, status: 200

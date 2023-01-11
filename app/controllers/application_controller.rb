@@ -7,8 +7,8 @@ class ApplicationController < ActionController::API
 
     def decode_token
         # Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAifQ.mqnFcbPSHIZBIATXHlRbu-qbwW9dny36cnXmujI0Gao (header exampl!)
-        auth_header = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAifQ.mqnFcbPSHIZBIATXHlRbu-qbwW9dny36cnXmujI0Gao"
-        #auth_header = request.headers['Authorization']
+        #auth_header = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAifQ.mqnFcbPSHIZBIATXHlRbu-qbwW9dny36cnXmujI0Gao"
+        auth_header = request.headers['Authorization']
         if auth_header
             token = auth_header.split(' ')[1]
             begin 
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::API
     end
 
     def authorize
-        render json: { message: 'You have to log in.' }, status: 400 unless
+        render json: { message: 'You have to log in.' }, status: 401 unless
         authorized_user
+    end
 end
-s

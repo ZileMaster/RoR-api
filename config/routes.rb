@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  
+  #testprimer user1 12345678
   namespace :api do
     post '/register/users', to: 'users#create'
     post '/login/users', to: 'users#show'
@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     resources :users do 
       resources :komentars
     end
+  end
+
+  namespace :api do
+    resources :komentars 
   end
 
   namespace :api do 
