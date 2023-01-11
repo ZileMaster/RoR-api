@@ -1,4 +1,6 @@
 class Api::ProjectPagesController < ApplicationController
+    before_action :authorizeAdmin, only:[:create, :update, :destroy]
+    before_action :authorizeAdmin, only:[:create, :update, :destroy]
 
     def index
         @projects_posts = Post.where(topic: "project")

@@ -1,5 +1,5 @@
 class Api::KomentarsController < ApplicationController
-    before_action :authorize, only: [:create]
+    before_action :authorize, only: [:create, :destroy, :update]
     
     def index
         @komentars = Komentar.all

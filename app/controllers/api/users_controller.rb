@@ -1,4 +1,7 @@
 class Api::UsersController < ApplicationController
+    before_action :authorizeAdmin, only:[:destroy]
+    before_action :authorize, only:[:destroy]
+    
     # GET /users
     def index 
         @users = User.all

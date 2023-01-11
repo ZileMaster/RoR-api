@@ -6,6 +6,9 @@ class Api::AdminsController < ApplicationController
         render json: @admins
     end
 
+    # "username": "mainAdmin1",
+    # "password": "MyNewPassword1",
+
     # get /admin/:id
     def show 
         @admin = Admin.find_by(username: admin_params[:username])

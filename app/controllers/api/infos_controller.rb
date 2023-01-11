@@ -1,4 +1,6 @@
 class Api::InfosController < ApplicationController
+    before_action :authorizeAdmin, only:[:create, :update, :destroy]
+
     def index
         @infos = Info.all
         render json: @infos
