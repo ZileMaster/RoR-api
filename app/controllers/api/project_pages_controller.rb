@@ -7,7 +7,7 @@ class Api::ProjectPagesController < ApplicationController
      end
      
      def show
-        @post = Post.where(id: params[:id], topic: "project")
+        @post = Post.where(id: params[:id], topic: "project").first
         render json: @post
     end
 
@@ -25,7 +25,7 @@ class Api::ProjectPagesController < ApplicationController
     end
 
     def destroy
-        @post = Post.where(id: params[:id], topic: "project")
+        @post = Post.where(id: params[:id], topic: "project").first
         if @post
             @post.destroy
             render json: { message: 'post destroyed'}, status: 200

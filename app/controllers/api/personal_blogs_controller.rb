@@ -26,7 +26,7 @@ class Api::PersonalBlogsController < ApplicationController
     end
 
     def destroy
-        @post = Post.where(id: params[:id], topic: "personal")
+        @post = Post.where(id: params[:id], topic: "personal").first
         if @post
             @post.destroy
             render json: { message: 'post destroyed'}, status: 200

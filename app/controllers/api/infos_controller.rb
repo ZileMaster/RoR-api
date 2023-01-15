@@ -21,7 +21,7 @@ class Api::InfosController < ApplicationController
     end
 
     def destroy
-        @info = Info.where(id: params[:id])
+        @info = Info.find(params[:id])
         if @info
             @info.destroy
             render json: { message: 'info destroyed'}, status: 200

@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-    before_action :authorizeAdmin, only:[:destroy]
+    before_action :authorizeAdmin, only:[:destroy, :index]
     #before_action :authorize, only:[:destroy]
     
     # GET /users

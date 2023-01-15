@@ -7,7 +7,7 @@ class Api::TravelBlogsController < ApplicationController
      end
 
      def show
-        @post = Post.where(id: params[:id], topic: "travel")
+        @post = Post.where(id: params[:id], topic: "travel").first
         render json: @post
     end
 
@@ -25,7 +25,7 @@ class Api::TravelBlogsController < ApplicationController
     end
 
     def destroy
-        @post = Post.find(params[:id])
+        @post = Post.where(id: params[:id], topic: "travel").first
         if @post
             @post.destroy
             render json: { message: 'post destroyed'}, status: 200
@@ -35,7 +35,7 @@ class Api::TravelBlogsController < ApplicationController
     end
 
     def update 
-        @post = Post.where(id: params[:id], topic: "travel")
+        @post = Post.where(id: params[:id], topic: "travel").first
         if @post && post.errors.empty?
             @post.update(post_params)
             render json: { message: 'post successfully updated' }, status: 200
