@@ -12,23 +12,34 @@ class Api::AdminsController < ApplicationController
     # get /admin/:id
     def show 
         @admin = Admin.find_by(username: admin_params[:username])
-
-            if @admin && @admin.authenticate(admin_params[:password])
-                token = encode_token({ admin_id: @admin.id})
-                render json: ({admin: @admin, token: token}), status: 200
+        if @admin.nil?
+            render json: { message: 'Admin not found.'}, status: :not_found
+        else 
+            if @admin.errors.empty? 
+                if @admin && @admin.authenticate(admin_params[:password])
+                    token = encode_token({ admin_id: @admin.id})
+                    render json: {admin: @admin, token: token}, status: 200
+                else
+                    render json: { message: 'Incorect username or password'}, status: 400
+                end
             else
-                render error: { error: 'unable to make user'}, status: 400
+                render json: { message: 'Incorect username or password'}, status: 400
             end
+        end
     end
 
     # POST /admins
     def create
         @admin = Admin.new(admin_params)
-        if @admin.save
-            token = encode_token({ admin_id: @admin.id })
-            render json: { admin: @admin, token: token}, status: 200 
+        if @admin.errors.empty?    
+            if @admin.save
+                token = encode_token({ admin_id: @admin.id })
+                render json: { admin: @admin, token: token}, status: 200 
+            else
+                render json: { message: 'unable to make admin'}, status: 400
+            end
         else
-            render error: { error: 'unable to make admin'}, status: 400
+            render json: { message: 'Make sure none field is empty, or the username/email is taken.' };
         end
     end
 

@@ -13,10 +13,14 @@ class Api::TravelBlogsController < ApplicationController
 
      def create
         @post = Post.new(post_params)
-        if @post.save 
-            render json: { message: "Post has been successfully made!"}, status: 200
+        if @post.errors.empty? 
+            if @post.save 
+                render json: { message: "Post has been successfully made!"}, status: 200
+            else
+                render json: { error: "post not creates"}, status: 400
+            end
         else
-            render json: { error: "post not creates"}, status: 400
+            render json: { message: 'Some of the fields entered are empty..' };
         end
     end
 
@@ -32,7 +36,7 @@ class Api::TravelBlogsController < ApplicationController
 
     def update 
         @post = Post.where(id: params[:id], topic: "travel")
-        if @post
+        if @post && post.errors.empty?
             @post.update(post_params)
             render json: { message: 'post successfully updated' }, status: 200
         else

@@ -1,6 +1,5 @@
 class Api::ProjectPagesController < ApplicationController
     before_action :authorizeAdmin, only:[:create, :update, :destroy]
-    before_action :authorizeAdmin, only:[:create, :update, :destroy]
 
     def index
         @projects_posts = Post.where(topic: "project")
@@ -14,10 +13,14 @@ class Api::ProjectPagesController < ApplicationController
 
      def create
         @post = Post.new(post_params)
-        if @post.save 
-            render json: { message: "Post has been successfully made!"}, status: 200
+        if @post.errors.empty? 
+            if @post.save 
+                render json: { message: "Post has been successfully made!"}, status: 200
+            else
+                render json: { message: "post not creates"}, status: 400
+            end
         else
-            render json: { error: "post not creates"}, status: 400
+            render json: { message: 'Some of the fields entered are empty..' }, status: 400
         end
     end
 
@@ -27,17 +30,17 @@ class Api::ProjectPagesController < ApplicationController
             @post.destroy
             render json: { message: 'post destroyed'}, status: 200
         else
-            render json: { error: 'post not destroyed'}, status: 400
+            render json: { message: 'post not destroyed'}, status: 400
         end
     end
 
     def update 
         @post = Post.find(params[:id])
-        if @post
+        if @post && @post.errors.empty?
             @post.update(post_params)
             render json: { message: 'post successfully updated' }, status: 200
         else
-            render json: { error: 'unable to make post'}, status: 400
+            render json: { message: 'unable to make post'}, status: 400
         end
     end
 

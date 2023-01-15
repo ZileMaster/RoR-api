@@ -13,7 +13,7 @@ class Api::InfosController < ApplicationController
      
      def create
         @info = Info.new(info_params)
-        if @info.save 
+        if @info.save && @info.errors.empty?
             render json: { message: "The information has been successfully made!"}, status: 200
         else
             render json: { error: "information not created"}, status: 400
@@ -32,7 +32,7 @@ class Api::InfosController < ApplicationController
 
     def update 
         @info = Info.find(params[:id])
-        if @info
+        if @info && info.errors.empty?
             @info.update(info_params)
             render json: { message: 'info successfully updated' }, status: 200
         else
