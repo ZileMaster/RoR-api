@@ -13,7 +13,7 @@ class Api::AdminsController < ApplicationController
     def show 
         @admin = Admin.find_by(username: admin_params[:username])
         if @admin.nil?
-            render json: { message: 'Admin not found.'}, status: :not_found
+            render json: { message: 'Admin not found!'}, status: :not_found
         else 
             if @admin.errors.empty? 
                 if @admin && @admin.authenticate(admin_params[:password])
