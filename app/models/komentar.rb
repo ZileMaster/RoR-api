@@ -5,7 +5,6 @@ class Komentar < ApplicationRecord
   validate :validations_com 
 
   def validations_com
-    if new_record?
       errors.add(:headline, "can't be blank") if headline.blank?
       errors.add(:description, "can't be blank") if description.blank?
       errors.add(:headline, "must have at least 10 letters") unless headline.length >= 10
