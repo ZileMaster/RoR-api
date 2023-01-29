@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     post '/login/users', to: 'users#show'
   end
 
+  namespace :api do 
+    post '/login', to: 'login#login'
+  end
+
   namespace :api do
     post '/register/admins', to: 'admins#create'
     post '/login/admins', to: 'admins#show'
