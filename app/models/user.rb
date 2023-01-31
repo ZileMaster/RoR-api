@@ -19,7 +19,6 @@ class User < ApplicationRecord
           errors.add(:first_name, "must have at least 3 letters") unless first_name.length >= 3
           errors.add(:last_name, "can't be blank") if last_name.blank?
           errors.add(:password, "can't be blank") if password.blank?
-          errors.add(:password, "must have at least 8 characters") unless password.length >= 8
           
       else
           errors.add(:username, "can't be blank") if username.blank?
