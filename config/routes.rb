@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    resources :posts
+  end
+
+  namespace :api do
     resources :notice_boards do
       resources :infos
     end
