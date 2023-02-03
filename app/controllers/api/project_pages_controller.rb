@@ -47,7 +47,7 @@ class Api::ProjectPagesController < ApplicationController
     private 
 
     def post_params
-      params.require(:post).permit(:headline, :description, :project_page_id, :travel_blog_id, :personal_blog_id, :likes, :topic)
+      params.require(:post).permit(:headline, :description, :project_page_id, :travel_blog_id, :personal_blog_id, :likes, :topic, :text)
     end
 
 end
