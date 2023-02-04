@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  
   namespace :api do
     post '/register/users', to: 'users#create'
     post '/login/users', to: 'users#show'
