@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   namespace :api do
     post '/register/users', to: 'users#create'
     post '/login/users', to: 'users#show'
+    get '/user/:id', to: 'users#justOne'
   end
 
   namespace :api do

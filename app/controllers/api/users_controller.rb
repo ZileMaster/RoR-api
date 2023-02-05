@@ -8,7 +8,17 @@ class Api::UsersController < ApplicationController
         render json: @users
     end
 
-    # get /user/:id
+    #ril get for the user
+    def justOne
+        @user = User.find_by(id: params[:id])
+        if @user.nil? 
+            render json: { message: 'User not found. '}, status: :not_found
+        else
+            render json: ({ user: @user }), status: 200
+        end
+    end
+
+    # get /users/:username
     def show 
         @user = User.find_by(username: user_params[:username])
         if @user.nil?
