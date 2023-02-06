@@ -9,7 +9,7 @@
 admins = Admin.create(username: "az_zile01", password_digest: "password1", email: "aleksaa.zivkovic01@gmail.com", first_name: "Aleksa", last_name: "Zivkovic")
 
 
-User.create(
+user = User.create(
     username: "example_username",
     password: "12345678",
     email: "example_user@example.com",
@@ -40,4 +40,4 @@ end
     Post.create(headline:"this is the head #{i}", description: "the description of the info number #{i}", topic: "personal", text: "sample text for the post, it should be very veryv very big but this is just a seed so it's lil" , travel_blog_id: travelPage.id, personal_blog_id: personalPage.id, project_page_id: projectPage.id, likes: 0);
 end
 
-news = Newsletter.create(user_id: User.id);
+news = Newsletter.create(user_id: user.id);
