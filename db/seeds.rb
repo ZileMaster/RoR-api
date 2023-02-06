@@ -41,7 +41,7 @@ end
 end
 
 3.times do |i|
-    Komentar.create(headline:"this is the head #{i}", description: "the description of the info number #{i}", user_id: 1, post_id:{i}, rating: 0)
+    Komentar.create(headline:"this is the head #{i}", description: "the description of the info number #{i}", user_id: 1, post_id:i, rating: 0)
 end
 
 news = Newsletter.create(user_id: User.id);
