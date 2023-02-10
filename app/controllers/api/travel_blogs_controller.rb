@@ -36,7 +36,7 @@ class Api::TravelBlogsController < ApplicationController
 
     def update 
         @post = Post.where(id: params[:id], topic: "travel").first
-        if @post && post.errors.empty?
+        if @post && @post.errors.empty?
             @post.update(post_params)
             render json: { message: 'post successfully updated' }, status: 200
         else
